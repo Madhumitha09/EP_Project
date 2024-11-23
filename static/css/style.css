@@ -1,0 +1,136 @@
+/* General body styling */
+body {
+    font-family: 'Sour Gummy', sans-serif;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    transition: background-image 1s ease-in-out; /* Smooth transition effect */
+}
+
+/* Header section */
+#header-container {
+    margin-top: 30px;
+}
+
+#title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);  /* Black outline effect */
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 8px;
+}
+
+/* Content text */
+#content {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Black outline effect */
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+/* Form container */
+#chart-form {
+    margin-top: 40px;
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Dropdowns container */
+.filter-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Dropdown label styling */
+label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #ffffff;  /* White text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);  /* Black outline effect */
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Styling the dropdowns */
+select {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    width: 350px;  /* Wider dropdown */
+    margin-bottom: 20px;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* Button Styling */
+button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 350px; /* Button aligned with dropdowns */
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Chart container */
+#chart-container {
+    margin-top: 20px;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    #title {
+        font-size: 2.5rem;
+    }
+
+    #content {
+        font-size: 1.2rem;
+    }
+
+    .filter-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    select {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    button {
+        width: 100%;
+    }
+}

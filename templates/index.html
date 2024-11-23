@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Comparison Charts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="static/css/style.css">  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="header-container">
+    <h1 id="tile">Country Comparison Charts</h1>
+</div>
+    <p id="content">Select two countries and a metric to compare.</p>
+
+    <form id="chart-form">
+        <div class="filter-content">
+        <select id="country1" name="country1">
+            <option value="">-- Select Country 1 --</option>
+            {% for country in countries %}
+            <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select>
+
+        <select id="country2" name="country2">
+            <option value="">-- Select Country 2 --</option>
+            {% for country in countries %}
+            <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select>
+
+<select id="column" name="column">
+    <option value="">-- Select Metric --</option>
+    {% for column in columns %}
+    <option value="{{ column }}">{{ column }}</option>
+    {% endfor %}
+</select>
+</div>
+
+        <button type="button" id="generate-chart">Generate Chart</button>
+    </form>
+
+    <div id="chart-container" style="margin-top: 20px;">
+        <!-- Chart will be displayed here -->
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#generate-chart').click(function () {
+                const country1 = $('#country1').val();
+                const country2 = $('#country2').val();
+                const column = $('#column').val();
+
+                if (country1 && country2 && column) {
+                    $.ajax({
+                        url: '/get_chart',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ country1, country2, column }),
+                        success: function (response) {
+                            const chartPath = response.chart_path;
+                            $('#chart-container').html(`<img src="/static/${chartPath}" alt="Chart" style="width: 80%; margin-top: 20px;">`);
+                        },
+                        error: function () {
+                            alert('Failed to generate chart. Please try again.');
+                        }
+                    });
+                } else {
+                    alert('Please select both countries and a metric.');
+                }
+            });
+        });
+    </script>
+       <script>
+        const images = [
+            'https://s3.amazonaws.com/external_clips/attachments/79198/original/shutterstock_243237340.jpg?1444752057',
+            'https://images.pexels.com/photos/4079281/pexels-photo-4079281.jpeg?cs=srgb&dl=pexels-anastasia-shuraeva-4079281.jpg&fm=jpg',
+            'https://images.pexels.com/photos/935743/pexels-photo-935743.jpeg'
+        ];
+
+        let currentIndex = 0;
+
+        function changeBackground() {
+            const body = document.body;
+            body.style.backgroundImage = `url('${images[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % images.length;
+        }
+
+        setInterval(changeBackground, 10000);
+        changeBackground();
+    </script>
+</body>
+</html>
