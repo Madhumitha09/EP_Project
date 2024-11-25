@@ -111,14 +111,54 @@ def index():
 
 @app.route('/get_chart', methods=['POST'])
 def get_chart():
-    data = request.json
-    country1 = data['country1']
-    country2 = data['country2']
-    column = data['column']
+    data = request.get_json()
+    country1 = data.get('country1')
+    country2 = data.get('country2')
+    column = data.get('column')
 
-    # Generate the chart
-    chart_path = generate_chart(country1, country2, column)
-    return jsonify({'chart_path': chart_path})
+    if not country1 or not country2 or not column:
+        return jsonify({'error': 'Invalid input'}), 400
+
+    try:
+        chart_path = generate_chart(country1, country2, column)
+        return jsonify({'chart_path': chart_path})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/get_analysis', methods=['POST'])
+def get_analysis():
+    data = request.get_json()
+    country1 = data.get('country1')
+    country2 = data.get('country2')
+    column = data.get('column')
+
+    if not country1 or not country2 or not column:
+        return jsonify({'error': 'Invalid input'}), 400
+
+    try:
+        # Example AI-generated analysis (replace with real implementation)
+        analysis = {
+            "Quantitative Comparison": f"{country1} has a higher average {column} than {country2}.",
+            "Cost Factors": {
+                "Housing": f"{country1} has 20% higher housing costs than {country2}.",
+                "Food": f"{country2} has 10% cheaper food costs compared to {country1}."
+            },
+            "Lifestyle Factors": {
+                "Safety": f"{country1} is ranked safer compared to {country2}.",
+                "Health Care": f"{country2} has a slightly better healthcare index."
+            },
+            "Recommendations": {
+                "Living": f"{country1} is ideal for families due to better safety and amenities.",
+                "Working": f"{country2} offers more affordable living costs for young professionals."
+            }
+        }
+
+        return jsonify({'analysis': analysis})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

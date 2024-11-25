@@ -40,6 +40,7 @@
     <option value="{{ column }}">{{ column }}</option>
     {% endfor %}
 </select>
+
 </div>
 
         <button type="button" id="generate-chart">Generate Chart</button>
@@ -47,9 +48,81 @@
 
     <div id="chart-container" style="margin-top: 20px;">
         <!-- Chart will be displayed here -->
+        
+
     </div>
+    <div id="tooltip" class="tooltip">Select a metric to see details.</div>
+    <button id="generate-analysis-btn">Generate AI Analysis</button>
+
+    <div id="ai-analysis">
+        <h2>AI-Generated Analysis</h2>
+        <div id="quantitative-comparison"></div>
+        <h3>Cost Factors</h3>
+        <ul id="cost-factors"></ul>
+        <h3>Lifestyle Factors</h3>
+        <ul id="lifestyle-factors"></ul>
+        <h3>Recommendations</h3>
+        <ul id="recommendations"></ul>
+    </div>
+    
+    
 
     <script>
+     document.getElementById("generate-analysis-btn").addEventListener("click", function () {
+    const country1 = document.getElementById("country1").value;
+    const country2 = document.getElementById("country2").value;
+    const column = document.getElementById("column").value;
+
+    if (!country1 || !country2 || !column) {
+        alert("Please select both countries and a metric.");
+        return;
+    }
+
+    fetch('/get_analysis', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ country1, country2, column })
+    })
+        .then(response => response.json())
+        .then(data => {
+            const analysis = data.analysis;
+
+            // Populate AI-Generated Analysis Section
+            document.getElementById("quantitative-comparison").innerText = analysis["Quantitative Comparison"];
+
+            // Populate Cost Factors
+            const costFactorsList = document.getElementById("cost-factors");
+            costFactorsList.innerHTML = '';
+            for (const [key, value] of Object.entries(analysis["Cost Factors"])) {
+                const li = document.createElement("li");
+                li.innerText = `${key}: ${value}`;
+                costFactorsList.appendChild(li);
+            }
+
+            // Populate Lifestyle Factors
+            const lifestyleFactorsList = document.getElementById("lifestyle-factors");
+            lifestyleFactorsList.innerHTML = '';
+            for (const [key, value] of Object.entries(analysis["Lifestyle Factors"])) {
+                const li = document.createElement("li");
+                li.innerText = `${key}: ${value}`;
+                lifestyleFactorsList.appendChild(li);
+            }
+
+            // Populate Recommendations
+            const recommendationsList = document.getElementById("recommendations");
+            recommendationsList.innerHTML = '';
+            for (const [key, value] of Object.entries(analysis["Recommendations"])) {
+                const li = document.createElement("li");
+                li.innerText = `${key}: ${value}`;
+                recommendationsList.appendChild(li);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+
         $(document).ready(function () {
             $('#generate-chart').click(function () {
                 const country1 = $('#country1').val();
@@ -93,6 +166,31 @@
 
         setInterval(changeBackground, 10000);
         changeBackground();
+
+        const metricDescriptions = {
+    "Purchasing Power Index ": "This metric measures the quality of healthcare services provided in a country.",
+    "Pollution Index": "This metric evaluates the average income of individuals in a country.",
+    "House Price to Income Ratio": "This metric represents the crime rate index, with lower values indicating safer environments.",
+    "Cost of Living Index": "This metric assesses the pollution levels in a country based on various factors.",
+    "Safety Index ":"",
+    "Health Care Index":"",
+    "Traffic Commute Time Index ":"",
+    "Climate Index":"",
+};
+
+document.getElementById('column').addEventListener('change', function () {
+    const selectedMetric = this.value;
+    const tooltip = document.getElementById('tooltip');
+
+    if (metricDescriptions[selectedMetric]) {
+        tooltip.textContent = metricDescriptions[selectedMetric];
+        tooltip.classList.add('visible');
+    } else {
+        tooltip.textContent = "Select a metric to see details.";
+        tooltip.classList.remove('visible');
+    }
+});
+
     </script>
 </body>
 </html>
