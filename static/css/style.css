@@ -11,6 +11,7 @@ body {
     font-size: larger;
     transition: background-image 1s ease-in-out; /* Smooth transition effect */
 }
+
 .tooltip {
     display: none;
     position: absolute;
@@ -29,7 +30,6 @@ body {
     display: block;
 }
 
-
 /* Header section */
 #header-container {
     margin-top: 30px;
@@ -39,7 +39,7 @@ body {
     font-size: 3rem;
     font-weight: bold;
     color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);  /* Black outline effect */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Black outline effect */
     display: inline-block;
     padding: 10px 30px;
     border-radius: 8px;
@@ -80,8 +80,8 @@ label {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 8px;
-    color: #ffffff;  /* White text */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);  /* Black outline effect */
+    color: #ffffff; /* White text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Black outline effect */
     padding: 5px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -96,7 +96,7 @@ select {
     border: 2px solid #ddd;
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
-    width: 350px;  /* Wider dropdown */
+    width: 350px; /* Wider dropdown */
     margin-bottom: 20px;
 }
 
@@ -123,10 +123,83 @@ button {
 button:hover {
     background-color: #45a049;
 }
+#metric-description-container {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#metric-description {
+    font-size: 14px;
+    color: #555;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 /* Chart container */
 #chart-container {
     margin-top: 20px;
+}
+
+/* AI Analysis Section */
+#ai-analysis {
+    margin-top: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    width: 80%;
+    margin: 40px auto;
+}
+
+#ai-analysis h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#ai-analysis h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#ai-analysis ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+#ai-analysis ul li {
+    margin-bottom: 10px;
+}
+
+/* AI Analysis Button */
+#generate-analysis-btn {
+    padding: 12px 20px;
+    background-color: #2196F3;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 350px;
+    margin-top: 30px;
+}
+
+#generate-analysis-btn:hover {
+    background-color: #1976D2;
 }
 
 /* Responsive design adjustments */
@@ -151,5 +224,9 @@ button:hover {
 
     button {
         width: 100%;
+    }
+
+    #ai-analysis {
+        width: 95%;
     }
 }
