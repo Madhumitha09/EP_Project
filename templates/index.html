@@ -168,15 +168,16 @@
         changeBackground();
 
         const metricDescriptions = {
-    "Purchasing Power Index ": "This metric measures the quality of healthcare services provided in a country.",
-    "Pollution Index": "This metric evaluates the average income of individuals in a country.",
-    "House Price to Income Ratio": "This metric represents the crime rate index, with lower values indicating safer environments.",
-    "Cost of Living Index": "This metric assesses the pollution levels in a country based on various factors.",
-    "Safety Index ":"",
-    "Health Care Index":"",
-    "Traffic Commute Time Index ":"",
-    "Climate Index":"",
+    "Purchasing Power Index": "This metric measures the purchasing power of individuals in a country relative to the cost of living.",
+    "Pollution Index": "This metric assesses the pollution levels in a country based on air and water quality, as well as other environmental factors.",
+    "House Price to Income Ratio": "This metric represents the affordability of housing in a country by comparing house prices to average household incomes.",
+    "Cost of Living Index": "This metric evaluates the overall cost of goods and services, including groceries, transportation, and utilities, in a country.",
+    "Safety Index": "This metric measures the safety levels in a country, with higher values indicating safer environments.",
+    "Health Care Index": "This metric evaluates the quality and accessibility of healthcare services in a country.",
+    "Traffic Commute Time Index": "This metric assesses the average time spent commuting by individuals in a country.",
+    "Climate Index": "This metric represents the overall comfort of the climate in a country based on factors like temperature, humidity, and weather conditions.",
 };
+
 
 document.getElementById('column').addEventListener('change', function () {
     const selectedMetric = this.value;
